@@ -253,6 +253,57 @@ ORDER BY yr DESC, winner ASC;
 ```sql
 SELECT winner, subject
 FROM nobel
-WHERE yr=1984
+WHERE yr = 1984
 ORDER BY subject IN ('physics','chemistry'), subject ASC, winner ASC;
+```
+
+# 4. SELECT within SELECT
+
+## 4.1
+
+```sql
+SELECT name
+FROM world
+WHERE population >
+(SELECT population
+FROM world
+WHERE name='Russia');
+```
+
+### 4.2
+
+```sql
+SELECT name
+FROM world
+WHERE continent = 'Europe'
+AND gdp / population >
+(SELECT gdp / population
+FROM world
+WHERE name = 'United Kingdom');
+```
+
+### 4.3
+
+```sql
+SELECT name, continent
+FROM world
+WHERE continent IN
+(SELECT continent
+FROM world
+WHERE name IN ('Argentina', 'Australia'));
+```
+
+### 4.4
+
+```sql
+SELECT name, population
+FROM world
+WHERE population >
+(SELECT population
+FROM world
+WHERE name = 'United Kingdom')
+AND population <
+(SELECT population
+FROM world
+WHERE name = 'Germany');
 ```
