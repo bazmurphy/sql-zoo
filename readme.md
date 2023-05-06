@@ -1,5 +1,7 @@
 # SQL Zoo
 
+https://sqlzoo.net/
+
 ## 1. SELECT basics
 
 ### 1.1
