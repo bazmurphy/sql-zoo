@@ -349,59 +349,63 @@ WHERE name = 'Germany');
 ### 5.1
 
 ```sql
-.
+SELECT SUM(population)
+FROM world;
 ```
 
 ### 5.2
 
 ```sql
-.
+SELECT DISTINCT continent
+FROM world;
 ```
 
 ### 5.3
 
 ```sql
-.
+SELECT SUM(gdp)
+FROM world
+WHERE continent = 'Africa';
 ```
 
 ### 5.4
 
 ```sql
-.
+SELECT COUNT(area)
+FROM world
+WHERE area >= 1000000;
 ```
 
 ### 5.5
 
 ```sql
-.
+SELECT SUM(population)
+FROM world
+WHERE name IN ('Estonia', 'Latvia', 'Lithuania');
 ```
 
 ### 5.6
 
 ```sql
-.
+SELECT continent, COUNT(name)
+FROM world
+GROUP BY continent;
 ```
 
 ### 5.7
 
 ```sql
-.
+SELECT continent, COUNT(name)
+FROM world
+WHERE population >= 10000000
+GROUP BY continent;
 ```
 
 ### 5.8
 
 ```sql
-.
-```
-
-### 5.9
-
-```sql
-.
-```
-
-### 5.10
-
-```sql
-.
+SELECT continent
+FROM world
+GROUP BY continent
+HAVING SUM(population) > 100000000;
 ```
