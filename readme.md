@@ -409,3 +409,139 @@ FROM world
 GROUP BY continent
 HAVING SUM(population) > 100000000;
 ```
+
+## 6. JOIN
+
+### 6.1
+
+```sql
+SELECT matchid, player
+FROM goal
+WHERE teamid = 'GER';
+```
+
+### 6.2
+
+```sql
+SELECT id,stadium,team1,team2
+FROM game
+WHERE id = 1012;
+```
+
+### 6.3
+
+```sql
+SELECT player,teamid, stadium, mdate
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE teamid = 'GER';
+```
+
+### 6.4
+
+```sql
+SELECT team1, team2, player
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE player LIKE 'Mario%';
+```
+
+### 6.5
+
+```sql
+SELECT player, teamid, coach, gtime
+FROM goal
+JOIN eteam
+ON goal.teamid = eteam.id
+WHERE gtime <= 10;
+```
+
+### 6.6
+
+```sql
+SELECT mdate, teamname
+FROM game
+JOIN eteam
+ON game.team1 = eteam.id
+WHERE coach = 'Fernando Santos';
+```
+
+### 6.7
+
+```sql
+SELECT player
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE stadium = 'National Stadium, Warsaw';
+```
+
+### 6.8
+
+```sql
+SELECT DISTINCT player
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE (team1 = 'GER' OR team2 = 'GER')
+AND teamid != 'GER';
+```
+
+### 6.9
+
+```sql
+SELECT teamname, COUNT(teamname)
+FROM eteam
+JOIN goal
+ON eteam.id = goal.teamid
+GROUP BY teamname;
+```
+
+### 6.10
+
+```sql
+SELECT stadium, COUNT(matchid)
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+GROUP BY stadium;
+```
+
+### 6.11
+
+```sql
+SELECT id, mdate, count(id)
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE (team1 = 'POL' OR team2 = 'POL')
+GROUP BY id, mdate;
+```
+
+### 6.12
+
+```sql
+SELECT matchid, mdate, COUNT(matchid)
+FROM game
+JOIN goal
+ON game.id = goal.matchid
+WHERE teamid = 'GER'
+GROUP BY matchid, mdate;
+```
+
+### 6.13
+
+```sql
+SELECT
+  mdate,
+  team1,
+  SUM(CASE WHEN teamid = team1 THEN 1 ELSE 0 END) AS score1,
+  team2,
+  SUM(CASE WHEN teamid = team2 THEN 1 ELSE 0 END) AS score2
+FROM game
+LEFT JOIN goal
+ON game.id = goal.matchid
+GROUP BY mdate, matchid, team1, team2;
+```
