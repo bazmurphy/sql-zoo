@@ -423,7 +423,7 @@ WHERE teamid = 'GER';
 ### 6.2
 
 ```sql
-SELECT id,stadium,team1,team2
+SELECT id, stadium, team1, team2
 FROM game
 WHERE id = 1012;
 ```
@@ -431,7 +431,7 @@ WHERE id = 1012;
 ### 6.3
 
 ```sql
-SELECT player,teamid, stadium, mdate
+SELECT player, teamid, stadium, mdate
 FROM game
 JOIN goal
 ON game.id = goal.matchid
